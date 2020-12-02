@@ -1,0 +1,15 @@
+.sidenav-content {
+  display: grid;
+	padding: 15px 25px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+}
+
+.card {
+  max-width: 500px;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+}
