@@ -12,7 +12,7 @@ import {IProduct} from '../models/IProduct';
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   public mobileQuery: MediaQueryList;
-  public displayedColumns: string[] = ['name', 'price', 'count', 'totalProductCount'];
+  public displayedColumns: string[] = ['name', 'price', 'count', 'totalProductCount', 'delete'];
   public cartProducts$: BehaviorSubject<IProduct[]>;
   public total$: BehaviorSubject<number>;
 
@@ -37,11 +37,15 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
-  addProductToCart(product: IProduct): void {
+  addProductToCart(product: IProduct): void{
     this.productService.addProductToCart(product);
   }
 
-  removeProductFromCart(product: IProduct): void {
+  removeOneProductFromCart(product: IProduct): void{
+    this.productService.removeOneProductFromCart(product);
+  }
+
+  removeProductFromCart(product: IProduct): void{
     this.productService.removeProductFromCart(product);
   }
 }

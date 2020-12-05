@@ -37,7 +37,7 @@ export class ProductService {
     }
   }
 
-  removeProductFromCart(removedProduct: IProduct): void{
+  removeOneProductFromCart(removedProduct: IProduct): void{
     const cartProducts = this.cartProducts$.getValue();
     const index = cartProducts.findIndex(product => product.id === removedProduct.id);
 
@@ -50,6 +50,15 @@ export class ProductService {
       cartProducts[index].count--;
     }
 
+    this.cartProducts$.next([...cartProducts]);
+  }
+
+  removeProductFromCart(removedProduct: IProduct): void{
+    const cartProducts = this.cartProducts$.getValue();
+    const index = cartProducts.findIndex(product => product.id === removedProduct.id);
+    this.countProduct$.next(this.countProduct$.getValue() - removedProduct.count);
+    this.total$.next(this.total$.getValue() - (removedProduct.price * removedProduct.count));
+    cartProducts.splice(index, 1);
     this.cartProducts$.next([...cartProducts]);
   }
 }

@@ -5,6 +5,19 @@ table {
 h4 {
   font-weight: bold;
   font-size: 16px;
+  margin: 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.delete {
+  color: maroon;
 }
 
 .no-products {
