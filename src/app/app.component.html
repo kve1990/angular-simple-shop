@@ -14,7 +14,7 @@
 
 <mat-drawer-container class="container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side" [opened]="mobileQuery.matches">
-    <mat-selection-list #shoes [multiple]="false">
+    <mat-selection-list #shoes [multiple]="false" color="primary">
       <mat-list-option routerLink="" selected>Главная</mat-list-option>
       <mat-list-option [routerLink]="['category', category.id]" *ngFor="let category of categories$ | async" [value]="category">
         {{category.name}}
