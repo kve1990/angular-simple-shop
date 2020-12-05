@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   addProductToCart(product: IProduct): void {
-    this.snackBar.openFromComponent(SnackBarComponent, {duration: 3000});
+    this.snackBar.openFromComponent(SnackBarComponent, {duration: 1000});
     this.productService.addProductToCart(product);
   }
 
