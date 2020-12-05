@@ -14,7 +14,7 @@ import {ProductService} from '../product.service';
     trigger('flyIn', [
       state('in', style({ transform: 'translateY(0)' })),
       transition('void => *', [
-        style({ transform: 'translateY(-5px)', opacity: 0 }),
+        style({ transform: 'translateY(6px)', opacity: .2 }),
         animate(300)
       ])
     ])
