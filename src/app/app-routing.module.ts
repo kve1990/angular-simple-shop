@@ -4,10 +4,10 @@ import {HomeComponent} from './home/home.component';
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'category/:id', component: HomeComponent},
   { path: 'cart', component: ShoppingCartComponent},
-  { path: '**', redirectTo: '/' }
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
