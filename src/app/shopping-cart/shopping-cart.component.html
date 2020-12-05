@@ -1,4 +1,4 @@
-<div class="content">
+<div [style.padding]="mobileQuery.matches ? '15px 25px' : '0'">
   <table mat-table [dataSource]="cartProducts$ | async" class="mat-elevation-z8" *ngIf="(cartProducts$ | async).length; else noProducts">
 
     <ng-container matColumnDef="name">
