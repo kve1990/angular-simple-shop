@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy{
   public total: number;
 
   private productsSubscription: Subscription;
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
   constructor(
     private router: Router,
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit, OnDestroy{
     public media: MediaMatcher
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 620px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
   }
 
   ngOnInit(): void{
@@ -52,6 +52,6 @@ export class AppComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void{
     this.productsSubscription.unsubscribe();
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 }
