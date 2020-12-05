@@ -40,5 +40,7 @@
     <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
   </table>
 
-  <ng-template #noProducts>Вы еще не добавили товары в корзину!</ng-template>
+  <ng-template #noProducts>
+    <div class="no-products">Корзина 🗑 пуста!</div>
+  </ng-template>
 </div>
