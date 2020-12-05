@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {trigger, state, style, animate, transition} from '@angular/animations';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 import {pluck} from 'rxjs/operators';
 import {IProduct} from '../models/IProduct';
@@ -26,10 +27,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private snackBar: MatSnackBar
   ) { }
 
   addProductToCart(product: IProduct): void {
+    this.snackBar.openFromComponent(SnackBarComponent, {duration: 3000});
     this.productService.addProductToCart(product);
   }
 
@@ -51,3 +54,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 }
+
+@Component({
+  template: `
+    <div class="center">✅ Товар добавлен в корзину</div>
+  `,
+  styles: [`
+    .center {text-align: center}
+  `]
+})
+export class SnackBarComponent {}
