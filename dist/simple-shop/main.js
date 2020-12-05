@@ -430,7 +430,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
             Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["trigger"])('flyIn', [
                 Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["state"])('in', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(0)' })),
                 Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["transition"])('void => *', [
-                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(-5px)', opacity: 0 }),
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(6px)', opacity: .2 }),
                     Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])(300)
                 ])
             ])
@@ -445,7 +445,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
                     Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["trigger"])('flyIn', [
                         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["state"])('in', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(0)' })),
                         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["transition"])('void => *', [
-                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(-5px)', opacity: 0 }),
+                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(6px)', opacity: .2 }),
                             Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])(300)
                         ])
                     ])
