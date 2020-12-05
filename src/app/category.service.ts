@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject, BehaviorSubject} from 'rxjs';
-import categories from '../assets/categories.json';
 import {ICategory} from './models/ICategory';
+import categories from '../assets/categories.json';
 
 @Injectable({
   providedIn: 'root'

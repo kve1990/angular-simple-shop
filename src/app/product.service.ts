@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import products from '../assets/products.json';
-import {IProduct} from './models/IProduct';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
+import {IProduct} from './models/IProduct';
+import products from '../assets/products.json';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +46,9 @@ export class ProductService {
 
     if (cartProducts[index].count === 1) {
       cartProducts.splice(index, 1);
-      this.cartProducts$.next([...cartProducts]);
-      return;
-    }
-    if (cartProducts[index].count > 1) {
+    } else if (cartProducts[index].count > 1) {
       cartProducts[index].count--;
-      this.cartProducts$.next([...cartProducts]);
     }
+    this.cartProducts$.next([...cartProducts]);
   }
 }
