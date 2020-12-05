@@ -7,19 +7,30 @@
 
   <button mat-button class="icon" aria-label="shopping_cart" routerLink="cart">{{total | currency}}&nbsp;</button>
   <button mat-icon-button class="icon" aria-label="shopping_cart" routerLink="cart">
-      <mat-icon  [matBadge]="countProduct" matBadgePosition="before" matBadgeColor="accent">shopping_cart</mat-icon>
+      <mat-icon
+        [matBadge]="countProduct"
+        [matBadgeHidden]="!countProduct"
+        matBadgePosition="before"
+        matBadgeColor="accent">
+          shopping_cart
+      </mat-icon>
   </button>
 
 </mat-toolbar>
 
 <mat-drawer-container class="container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side" [opened]="mobileQuery.matches">
-    <mat-selection-list #shoes [multiple]="false" color="primary">
-      <mat-list-option routerLink="" selected>Главная</mat-list-option>
-      <mat-list-option [routerLink]="['category', category.id]" *ngFor="let category of categories$ | async" [value]="category">
+  <mat-drawer
+    #drawer
+    class="sidenav"
+    [mode]="mobileQuery.matches ? 'side' : 'over'"
+    [opened]="mobileQuery.matches">
+
+    <mat-nav-list role="navigation">
+      <mat-list-item routerLink="">Главная</mat-list-item>
+      <mat-list-item [routerLink]="['category', category.id]" *ngFor="let category of categories$ | async">
         {{category.name}}
-      </mat-list-option>
-    </mat-selection-list>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
 
   <router-outlet></router-outlet>
