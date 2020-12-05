@@ -1,5 +1,5 @@
 <div class="content">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource && dataSource.length; else noProducts">
+  <table mat-table [dataSource]="cartProducts$ | async" class="mat-elevation-z8" *ngIf="(cartProducts$ | async).length; else noProducts">
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Наименование </th>
@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="disclaimer">
       <td mat-footer-cell *matFooterCellDef colspan="4">
-        <h4>Цена за все товары: {{total | currency}}</h4>
+        <h4>Цена за все товары: {{total$ | async | currency}}</h4>
       </td>
     </ng-container>
 
