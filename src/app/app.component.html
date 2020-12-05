@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-   <button mat-icon-button class="icon" aria-label="menu icon">
+  <button mat-icon-button class="icon" aria-label="menu icon">
     <mat-icon (click)="drawer.toggle()">menu</mat-icon>
   </button>
   <span>Shop</span>
@@ -13,7 +13,7 @@
 </mat-toolbar>
 
 <mat-drawer-container class="container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side" opened>
+  <mat-drawer #drawer class="sidenav" mode="side" [opened]="mobileQuery.matches">
     <mat-selection-list #shoes [multiple]="false">
       <mat-list-option routerLink="" selected>Главная</mat-list-option>
       <mat-list-option [routerLink]="['category', category.id]" *ngFor="let category of categories$ | async" [value]="category">

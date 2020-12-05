@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {IProduct} from '../models/IProduct';
-import {ProductService} from '../product.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {pluck} from 'rxjs/operators';
+import {IProduct} from '../models/IProduct';
+import {ProductService} from '../product.service';
 
 @Component({
   selector: 'app-home',
@@ -15,27 +16,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-  	private productService: ProductService
+    private productService: ProductService
   ) { }
 
   addProductToCart(product: IProduct): void {
     this.productService.addProductToCart(product);
   }
 
-  ngOnInit() {
+  ngOnInit(): void{
     this.products = [...this.productService.products$.getValue()];
 
-    this. routeSubscription = this.route.params.subscribe(params => {
-      let products = [...this.productService.products$.getValue()]
-      if (params.id) {
-        this.products = products.filter(product => product.category == params.id)
-      } else {
-        this.products = products;
-      }
-    });
+    this. routeSubscription = this.route.params
+      .pipe(
+        pluck('id')
+      )
+      .subscribe(id => {
+        const products = [...this.productService.products$.getValue()];
+        this.products = id ? products.filter(product => product.category === +id) : products;
+      });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void{
     this. routeSubscription.unsubscribe();
   }
 

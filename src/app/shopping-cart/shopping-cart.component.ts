@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {ProductService} from '../product.service';
 import {IProduct} from '../models/IProduct';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,24 +10,24 @@ import {Subscription} from 'rxjs';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
-	displayedColumns: string[] = ['name', 'price', 'count', 'totalProductCount'];
-  dataSource;
-  total: number;
+  public displayedColumns: string[] = ['name', 'price', 'count', 'totalProductCount'];
+  public dataSource: IProduct[];
+  public total: number;
   private cartProductsSubscription: Subscription;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-  	this.cartProductsSubscription = this.productService.cartProducts$.subscribe(res => {
-  		this.dataSource = res;
-  		this.total = res.reduce((buffer, item) => {
-  			return buffer + item.count * item.price;
-  		}, 0);
-  	});
+    this.cartProductsSubscription = this.productService.cartProducts$.subscribe(products => {
+      this.dataSource = products;
+      this.total = products.reduce((buffer, item) => {
+        return buffer + item.count * item.price;
+      }, 0);
+    });
   }
 
   ngOnDestroy(): void {
-  	this.cartProductsSubscription.unsubscribe();
+    this.cartProductsSubscription.unsubscribe();
   }
 
   addProductToCart(product: IProduct): void {

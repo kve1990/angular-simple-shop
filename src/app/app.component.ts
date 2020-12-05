@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {MediaMatcher} from '@angular/cdk/layout';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {IProduct} from './models/IProduct';
 import {ICategory} from './models/ICategory';
 import {ProductService} from './product.service';
 import {CategoryService} from './category.service';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,23 +14,32 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy{
+
+  public mobileQuery: MediaQueryList;
   public categories$: BehaviorSubject<ICategory[]>;
   public products$: BehaviorSubject<IProduct[]>;
-  public countProduct: number = 0;
-  public total: number = 0;
+  public countProduct: number;
+  public total: number;
+
   private productsSubscription: Subscription;
+  private _mobileQueryListener: () => void;
 
   constructor(
-  	private router: Router,
-  	private productService: ProductService,
-  	private categoryService: CategoryService
+    private router: Router,
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    public changeDetectorRef: ChangeDetectorRef,
+    public media: MediaMatcher
   ) {
+    this.mobileQuery = media.matchMedia('(min-width: 620px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  ngOnInit() {
+  ngOnInit(): void{
     this.router.navigate(['']);
-  	this.products$ = this.productService.products$;
-  	this.categories$ = this.categoryService.categories$;
+    this.products$ = this.productService.products$;
+    this.categories$ = this.categoryService.categories$;
     this.productsSubscription = this.productService.cartProducts$.subscribe(products => {
       this.countProduct = products.reduce((buffer, item) => {
         return item ? buffer + item.count : buffer;
@@ -40,7 +50,8 @@ export class AppComponent implements OnInit, OnDestroy{
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void{
     this.productsSubscription.unsubscribe();
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }
