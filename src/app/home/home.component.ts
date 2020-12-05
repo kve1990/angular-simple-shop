@@ -37,8 +37,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void{
-    this.products = [...this.productService.products$.getValue()];
-
     this. routeSubscription = this.route.params
       .pipe(
         pluck('id')
@@ -52,7 +50,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void{
     this. routeSubscription.unsubscribe();
   }
-
 }
 
 @Component({

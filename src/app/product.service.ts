@@ -41,14 +41,15 @@ export class ProductService {
     const cartProducts = this.cartProducts$.getValue();
     const index = cartProducts.findIndex(product => product.id === removedProduct.id);
 
-    this.countProduct$.next(this.countProduct$.getValue() + 1);
-    this.total$.next(this.total$.getValue() + removedProduct.price);
+    this.countProduct$.next(this.countProduct$.getValue() - 1);
+    this.total$.next(this.total$.getValue() - removedProduct.price);
 
     if (cartProducts[index].count === 1) {
       cartProducts.splice(index, 1);
     } else if (cartProducts[index].count > 1) {
       cartProducts[index].count--;
     }
+
     this.cartProducts$.next([...cartProducts]);
   }
 }
